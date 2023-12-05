@@ -1,0 +1,76 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.main {
+  max-width: 1000px;
+  margin: auto;
+}
+body {
+  background-color: rgb(218, 231, 255);
+  font-family: "Raleway", sans-serif;
+}
+ul {
+  display: inline;
+  text-align: right;
+}
+.text {
+  text-align: center;
+}
+.center {
+  text-align: center;
+}
+.sulyg {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 0 20px;
+}
+a {
+  text-decoration: none;
+}
+div {
+  padding: 1px;
+  margin: 1px;
+  font-size: 14px;
+}
+.flex-container {
+  display: flex;
+  gap: 20px;
+  flex-direction: row;
+  height: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.flex-container > div {
+  background-color: rgb(210, 220, 221);
+  margin: 1px;
+  padding: 10px;
+  border: 1px solid black;
+  font-size: 14px;
+  text-align: center;
+  width: 300px;
+  height: 300px;
+  box-shadow: 2px 2px 3px 0px rgba(0, 0, 0, 0.74);
+  -webkit-box-shadow: 2px 2px 3px 0px rgba(0, 0, 0, 0.74);
+  -moz-box-shadow: 2px 2px 3px 0px rgba(0, 0, 0, 0.74);
+}
+
+h1 {
+  text-align: justify;
+  margin: 1%;
+}
+@media screen and (max-width: 620px) {
+  .sulyg {
+    align-items: center;
+    flex-direction: column;
+  }
+}
+@media screen and (max-width: 950px) {
+  .main {
+    max-width: 670px;
+  }
+}
