@@ -5,11 +5,29 @@
 }
 .main {
   max-width: 1000px;
+  min-height: 1250px;
   margin: auto;
 }
 body {
   background-color: rgb(218, 231, 255);
   font-family: "Raleway", sans-serif;
+}
+.navbar {
+  display: flex;
+  justify-content: space-around;
+  background-image: url(zigzag.png);
+  align-items: center;
+  width: 100%;
+  font-weight: bold;
+  height: 50px;
+}
+.logo {
+  height: 90%;
+  /* border: 1px solid black; */
+}
+.logo img {
+  object-fit: contain;
+  height: 100%;
 }
 ul {
   display: inline;
@@ -29,11 +47,6 @@ ul {
 }
 a {
   text-decoration: none;
-}
-div {
-  padding: 1px;
-  margin: 1px;
-  font-size: 14px;
 }
 .flex-container {
   display: flex;
@@ -61,11 +74,28 @@ div {
 
 h1 {
   text-align: justify;
-  margin: 1%;
+  /* margin: 1%; */
+}
+footer {
+  display: flex;
+  justify-content: space-around;
+  background-image: url(zigzag.png);
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+}
+footer a {
+  display: block;
+}
+i {
+  font-size: 24px;
 }
 @media screen and (max-width: 620px) {
   .sulyg {
     align-items: center;
+    flex-direction: column;
+  }
+  .navbar {
     flex-direction: column;
   }
 }
