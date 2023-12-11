@@ -10,6 +10,11 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
+    <script
+      type="text/javascript"
+      async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"
+    ></script>
   </head>
 
   <!-- Lukas -->
@@ -53,6 +58,90 @@
             <p class="text">Anglų kalba</p>
           </div>
         </div>
+        <div>
+          <h1 class="text">Formule</h1>
+          <div class="formule">\(a^2 = b^2 + c^2\)</div>
+        </div>
+        <div>
+          <h1 class="text">Objektas</h1>
+          <svg
+            class="objektas"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 145 125"
+            width="145"
+            height="100"
+          >
+            <!-- Cup Body without Bottom Line -->
+            <line
+              x1="20"
+              y1="0"
+              x2="130"
+              y2="0"
+              style="stroke: #000; stroke-width: 20"
+            />
+            <line
+              x1="25"
+              y1="0"
+              x2="25"
+              y2="35"
+              style="stroke: #000; stroke-width: 10"
+            />
+            <line
+              x1="125"
+              y1="0"
+              x2="125"
+              y2="35"
+              style="stroke: #000; stroke-width: 10"
+            />
+
+            <!-- Cup Body Rounded Bottom -->
+            <path
+              d="M 25 35 A 50 50 0 1 0 125 35"
+              fill="none"
+              stroke="black"
+              stroke-width="10"
+            />
+
+            <!-- Cup plate -->
+            <polygon
+              points="0,85 145,85 135,100 10,100"
+              fill="none"
+              stroke="black"
+              stroke-width="10"
+            ></polygon>
+
+            <!-- Cup Handle -->
+            <path
+              d="M 125 10 A 12.5 12.5 0 1 1 125 45"
+              fill="none"
+              stroke="black"
+              stroke-width="10"
+            />
+          </svg>
+        </div>
+
+        <div>
+          <h1 class="text">Kita formule</h1>
+          <div class="integralas">
+            \(Z(\upsilon)=\frac{1}{\sqrt{\pi}}\int_{-\infty}^{\infty}\frac{e^{-t^{2}}dt}{t-i\upsilon}=i\int_{0}^{\infty}e^{-\upsilon
+            t-t^{2}/4}dt\)
+          </div>
+        </div>
+      </div>
+      <div class="form-container">
+        <h2>Įveskite savo informaciją:</h2>
+        <form id="userForm">
+          <label for="firstName">Vardas:</label>
+          <input type="text" id="firstName" required />
+
+          <label for="lastName">Pavardė:</label>
+          <input type="text" id="lastName" required />
+
+          <label for="dob">Gimimo data:</label>
+          <input type="date" id="dob" required />
+
+          <button type="button" onclick="saveUserData()">Išsaugoti</button>
+        </form>
       </div>
     </div>
 
@@ -76,5 +165,55 @@
         >
       </div>
     </footer>
+    <script>
+      function saveUserData() {
+        const user = {
+          firstName: document.getElementById("firstName").value,
+          lastName: document.getElementById("lastName").value,
+          dob: document.getElementById("dob").value,
+        };
+
+        console.log("Išsaugota informacija:", user);
+        const main = document.querySelector(".main");
+        const displayDiv = displayOnPage(user);
+
+        const daysLived = calculateDaysLived(user.dob);
+        main.appendChild(displayDiv);
+        main.appendChild(daysLived);
+      }
+
+      function displayOnPage(user) {
+        const displayDiv = document.createElement("div");
+        displayDiv.innerHTML =
+          "<h3>Vartotojo informacija:</h3>" +
+          "<p>Vartotojo vardas: " +
+          user.firstName +
+          "</p>" +
+          "<p>Vartotojo pavardė: " +
+          user.lastName +
+          "</p>" +
+          "<p>Gimimo data: " +
+          user.dob +
+          "</p>";
+        // const main = document.querySelector(".main");
+        // main.appendChild(displayDiv);
+        return displayDiv;
+      }
+
+      function calculateDaysLived(dob) {
+        const birthDate = new Date(dob);
+        const currentDate = new Date();
+        const timeDiff = currentDate - birthDate;
+        const daysLived = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+        const displayDiv = document.createElement("div");
+
+        const daysWordEnding =
+          daysLived % 10 === 1 && daysLived % 100 !== 11 ? "diena" : "dienų";
+
+        console.log("Vartotojas nugyveno", daysLived, daysWordEnding);
+        displayDiv.innerHTML = `Vartotojas nugyveno ${daysLived} ${daysWordEnding}`;
+        return displayDiv;
+      }
+    </script>
   </body>
 </html>
