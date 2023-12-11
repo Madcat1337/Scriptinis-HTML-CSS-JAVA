@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Namų LED apšvietimo kontrolė</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.1/spectrum.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin: 50px;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      #lightBulbContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      #colorDisplay {
+        width: 100px;
+        height: 100px;
+        background-color: #ccc;
+        border-radius: 50%;
+        margin: 20px;
+      }
+
+      #lampIcon {
+        width: 100px;
+        height: 100px;
+        background: url("lamp_icon.png") no-repeat center center;
+        background-size: contain;
+        margin: 20px;
+      }
+
+      button {
+        padding: 10px;
+        font-size: 16px;
+        margin: 10px;
+        cursor: pointer;
+      }
+
+      #onButton {
+        background-color: #4caf50;
+        color: white;
+        border: none;
+      }
+
+      #offButton {
+        background-color: #f44336;
+        color: white;
+        border: none;
+      }
+
+      #randomColorButton {
+        background-color: #2196f3;
+        color: white;
+        border: none;
+      }
+
+      #colorPickerContainer {
+        display: inline-block;
+        vertical-align: top;
+        margin-top: 20px;
+      }
+
+      #colorPicker {
+        width: 200px;
+      }
+
+      #weatherContainer {
+        width: 200px;
+        padding: 20px;
+        background-color: #f5f5f5;
+        border-radius: 10px;
+        text-align: left;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Namų LED apšvietimo kontrolė</h1>
+
+    <div id="lightBulbContainer">
+      <div id="colorDisplay"></div>
+      <div id="lampIcon"></div>
+      <button id="onButton">Įjungti</button>
+      <button id="offButton">Išjungti</button>
+      <button id="randomColorButton">Atsitiktinė spalva</button>
+      <div id="colorPickerContainer">
+        <input type="text" id="colorPicker" />
+      </div>
+    </div>
+
+    <div id="weatherContainer">
+      <h2>Oro informacija</h2>
+      <p>Drėgnumas: <span id="humidity"></span>%</p>
+      <p>Temperatūra: <span id="temperature"></span>°C</p>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.1/spectrum.min.js"></script>
+    <script>
+      const colorDisplay = document.getElementById("colorDisplay");
+      const onButton = document.getElementById("onButton");
+      const offButton = document.getElementById("offButton");
+      const randomColorButton = document.getElementById("randomColorButton");
+      const colorPicker = $("#colorPicker");
+      const humidityElement = document.getElementById("humidity");
+      const temperatureElement = document.getElementById("temperature");
+
+      onButton.addEventListener("click", () => {
+        colorDisplay.style.backgroundColor = colorPicker.val();
+      });
+
+      offButton.addEventListener("click", () => {
+        colorDisplay.style.backgroundColor = "#ccc";
+      });
+
+      randomColorButton.addEventListener("click", () => {
+        const randomColor = getRandomColor();
+        colorDisplay.style.backgroundColor = randomColor;
+        colorPicker.spectrum("set", randomColor);
+      });
+
+      colorPicker.spectrum({
+        type: "component",
+        showInput: true,
+        showInitial: true,
+        preferredFormat: "hex",
+        chooseText: "Select",
+        cancelText: "Cancel",
+      });
+
+      // Update weather information
+      updateWeatherInformation();
+
+      function updateWeatherInformation() {
+        const randomHumidity = Math.floor(Math.random() * 100);
+        const randomTemperature = Math.floor(Math.random() * 30) + 10;
+
+        humidityElement.textContent = randomHumidity;
+        temperatureElement.textContent = randomTemperature;
+      }
+
+      function getRandomColor() {
+        const letters = "0123456789ABCDEF";
+        let color = "#";
+        for (let i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+      }
+    </script>
+  </body>
+</html>
